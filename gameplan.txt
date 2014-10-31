@@ -1,0 +1,13 @@
+Mini Project to Get Started with Kiind
+
+1. Create Git Repo in Folder under /workspace
+https://getcomposer.org/
+curl -sS https://getcomposer.org/installer | php
+2. Use/install Guzzle via Composer with PSR-0
+http://guzzle.readthedocs.org/en/latest/overview.html#installation
+\<NamespaceName>(\<SubNamespaceNames>)*\<ClassName>
+3. Register Username/API Keys with Kiind
+4. Do a few tests of Guzzle+Kiind
+5. Push to Github!
+6. Add API Keys for Ow.ly and use with Guzzle
+7. Push to Github!
