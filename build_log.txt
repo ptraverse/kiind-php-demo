@@ -1,0 +1,30 @@
+//get Composer
+curl -sS https://getcomposer.org/installer | php
+
+//initialize composer json file
+touch composer.json
+echo "{}" >> composer.json
+
+//install composer (no packages yet. will auto install the autoloader)
+php ./composer.phar install
+
+//add Autoload PSR-0 standard
+echo "<?php require 'vendor/autoload.php';" >> ./config.php
+
+//require guzzlehttp/guzzle ~5.0 in composer.json as per http://guzzle.readthedocs.org/en/latest/overview.html#installation
+vim composer.json 
+
+//might as well add phpunit (4.3.4) as well... https://packagist.org/packages/phpunit/phpunit 
+vim composer.json
+
+//install the packages specified in composer file
+php ./composer.phar install
+
+//Got PHP out of date ... oops
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php5-oldstable
+sudo apt-get update
+sudo apt-get install php5
+
+//try to use composer again... :)
+php ./composer.phar install
