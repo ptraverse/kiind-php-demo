@@ -1,44 +1,70 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
-
-class owly
+class Owly
 {
-	private $api_key,$base_url,$client;
+	private $apiKey,$baseUrl,$client;
 	
 	public function __construct()
 	{
-		$this->api_key = OWLY_API_KEY;
-		$this->base_url = OWLY_BASE_URL;
+		$this->apiKey = OWLY_API_KEY;
+		$this->baseUrl = OWLY_BASE_URL;
 		$this->client = new GuzzleHttp\Client();
 	}
 	
-	public function url_shorten($longUrl)
+	public function urlShorten($longUrl)
+	{
+		$request = $this->client->createRequest('GET', $this->baseUrl.'url/shorten');
+		$query = $request->getQuery();
+		$query->set('apiKey', $this->apiKey);
+		$query->set('longUrl', $longUrl);
+		$res = $this->client->send($request);
+		return $res;		
+	}
+	
+	public function urlExpand($shortUrl)
+	{
+		$request = $this->client->createRequest('GET', $this->baseUrl.'url/expand');
+		$query = $request->getQuery();
+		$query->set('apiKey', $this->apiKey);
+		$query->set('shortUrl', $shortUrl);
+		$res = $this->client->send($request);
+		return $res;	
+	}
+	
+	public function urlInfo($shortUrl)
+	{
+		$request = $this->client->createRequest('GET', $this->baseUrl.'url/info');
+		$query = $request->getQuery();
+		$query->set('apiKey', $this->apiKey);
+		$query->set('shortUrl', $shortUrl);
+		$res = $this->client->send($request);
+		return $res;	
+	}
+	
+	public function urlClickStats($shortUrl,$fromDate='',$toDate='')
+	{
+		$request = $this->client->createRequest('GET', $this->baseUrl.'url/clickStats');
+		$query = $request->getQuery();
+		$query->set('apiKey', $this->apiKey);
+		$query->set('shortUrl', $shortUrl);
+		if ($fromDate!='')
+		{
+			$query->set('from', $fromDate);
+		}
+		if ($toDate!='')
+		{
+			$query->set('to', $toDate);
+		}
+		$res = $this->client->send($request);
+		return $res();
+	}
+	
+	public function photoUpload($filename,$fileData)
 	{
 		echo "notImplementedYet\n";
 	}
 	
-	public function url_expand($shortUrl)
-	{
-		echo "notImplementedYet\n";		
-	}
-	
-	public function url_info($shortUrl)
-	{
-		echo "notImplementedYet\n";
-	}
-	
-	public function url_clickStats($shortUrl,$from_date='',$to_date='')
-	{
-		echo "notImplementedYet\n";
-	}
-	
-	public function photo_upload($filename,$file_data)
-	{
-		echo "notImplementedYet\n";
-	}
-	
-	public function doc_upload($filename,$file_data)
+	public function docUpload($filename,$fileData)
 	{
 		echo "notImplementedYet\n";
 	}
