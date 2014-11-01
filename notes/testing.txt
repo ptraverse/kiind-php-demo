@@ -3,6 +3,8 @@ apt-get install php-pear
 pecl install xdebug
 
 #add the following line to php.ini
-zend_extension="/usr/local/php/modules/xdebug.so"
+vim /etc/php5/cli/php.ini
+zend_extension="/usr/lib/php5/20100525+lfs/xdebug.so"
+/etc/init.d/apache2 restart
  
 vendor/bin/phpunit --bootstrap config.php --coverage-html vendor/phpunit/php-code-coverage/ vendor/phpunit/phpunit/tests/OwlyTest
