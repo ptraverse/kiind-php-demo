@@ -3,21 +3,15 @@
 require_once('config.php');
 
 $client = new GuzzleHttp\Client();
-$response = $client->get('http://guzzlephp.org');
-$res = $client->get('https://api.github.com/user', ['auth' =>  ['ptraverse', 'REDACTED']]);
-echo $res->getStatusCode();
-// "200"
-echo $res->getHeader('content-type');
-// 'application/json; charset=utf8'
-echo $res->getBody();
-// {"type":"User"...'
-var_export($res->json());
-// Outputs the JSON decoded data
+$response = $client->get(OWLY_BASE_URL);
+$testShortUrl = "http://ow.ly/1234";
+$request = $client->createRequest('GET', OWLY_BASE_URL.'url/info');
+$query = $request->getQuery();
+$query->set('apiKey', OWLY_API_KEY);
+$query->set('shortUrl', $testShortUrl);
+$res = $client->send($request);
+var_dump($res->json());
 
-// Send an asynchronous request.
-$req = $client->createRequest('GET', 'http://httpbin.org', ['future' => true]);
-$client->send($req)->then(function ($response) {
-	echo 'I completed! ' . $response;
-});
+
 
 ?>
