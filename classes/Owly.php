@@ -61,12 +61,12 @@ class Owly
 	
 	public function photoUpload($filename,$fileData)
 	{
-		echo "notImplementedYet\n";
+		throw new Exception('Not yet implemented');
 	}
 	
 	public function docUpload($filename,$fileData)
 	{
-		echo "notImplementedYet\n";
+		throw new Exception('Not yet implemented');
 	}
 	
 }
