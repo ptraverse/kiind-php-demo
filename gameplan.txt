@@ -9,5 +9,6 @@ http://guzzle.readthedocs.org/en/latest/overview.html#installation
 3. Register Username/API Keys with Kiind
 4. Do a few tests of Guzzle+Kiind
 5. Push to Github!
-6. Add API Keys for Ow.ly and use with Guzzle
+6. Add API Keys under /private for Ow.ly and use with Guzzle
 7. Push to Github!
+8. Classify owly with guzzle
