@@ -12,3 +12,6 @@ http://guzzle.readthedocs.org/en/latest/overview.html#installation
 6. Add API Keys under /private for Ow.ly and use with Guzzle
 7. Push to Github!
 8. Classify owly with guzzle
+9. Run PHP Unit and Show some code coverage
+10. Push to Github!
+11. TODO- Get Kiind going!!!
