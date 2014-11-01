@@ -8,3 +8,5 @@ zend_extension="/usr/lib/php5/20100525+lfs/xdebug.so"
 /etc/init.d/apache2 restart
  
 vendor/bin/phpunit --bootstrap config.php --coverage-html vendor/phpunit/php-code-coverage/ vendor/phpunit/phpunit/tests/OwlyTest
+
+saved screenshot to notes/
