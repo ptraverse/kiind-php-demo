@@ -1,3 +1,6 @@
-vendor/*
 private/*
 composer.lock
+
+vendor/*
+!vendor/**/*Test.php
+
