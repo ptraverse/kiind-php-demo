@@ -1,6 +1,6 @@
 <?php
 
-class Owly
+class OwlyService
 {
 	private $apiKey,$baseUrl,$client;
 	

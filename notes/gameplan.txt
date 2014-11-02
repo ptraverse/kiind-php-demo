@@ -15,3 +15,6 @@ http://guzzle.readthedocs.org/en/latest/overview.html#installation
 9. Run PHP Unit and Show some code coverage
 10. Push to Github!
 11. TODO- Get Kiind going!!!
+11.5 Create CLI Prototype
+12. Add classes: Campaign, Link, User. 
+13. Add Doctrine ORM and use with Campaign, Link, User 
