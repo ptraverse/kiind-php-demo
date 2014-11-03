@@ -1,12 +1,12 @@
 <?php
-class OwlyServiceTest extends PHPUnit_Framework_TestCase
+class OwlyApiServiceTest extends PHPUnit_Framework_TestCase
 {
 	
 	private $owly;
 	
 	public function __construct()
 	{
-		$this->owly = new OwlyService();
+		$this->owly = new OwlyApiService();
 	}
 	
 	public function testUrlInfo()

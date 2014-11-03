@@ -8,7 +8,12 @@ use Doctrine\ORM\Mapping AS ORM;
  */
 class User
 {
-	/** @ORM\Id @ORM\Column @ORM\GeneratedValue */
+	/** 
+	 * @ORM\Id 
+	 * @ORM\Column(type="integer") 
+	 * @ORM\GeneratedValue 
+	 * 
+	*/
 	private $id;
 	/** @ORM\Column(length=140) */
 	private $email;

@@ -37,7 +37,6 @@ switch ($mode)
 		$password_confirm = trim(fgets($f));
 		$user = new User($email,$password,$password_confirm);
 		$exists = $em->getRepository('User')->findOneBy(array('email' => $email));
-		var_dump($exists);
 		if ($exists==FALSE)
 		{
 			$em->persist($user);
