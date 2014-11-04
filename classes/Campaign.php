@@ -1,15 +1,25 @@
 <?php
 
+/**
+ * @ORM\Entity
+ */
 class Campaign
 {
-	
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue
+	 */
 	private $id;
-	
+	/** @ORM\Column(length=1024) */
 	private $longUrl;
-	
+	/** @ORM\Column(length=24) */
 	private $shortName;
-	
-	private $userId;
+	/** 
+	 * @ORM\ManyToOne(targetEntity="User")
+	 * TODO - Finish This Relationship
+	 */
+	private $user;
 	
 	public function __construct($longUrl,$shortName,$userId)
 	{

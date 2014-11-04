@@ -4,15 +4,13 @@ use Doctrine\ORM\Mapping AS ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user")
  */
 class User
 {
 	/** 
 	 * @ORM\Id 
 	 * @ORM\Column(type="integer") 
-	 * @ORM\GeneratedValue 
-	 * 
+	 * @ORM\GeneratedValue  
 	*/
 	private $id;
 	/** @ORM\Column(length=140) */

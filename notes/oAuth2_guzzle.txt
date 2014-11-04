@@ -1,0 +1,12 @@
+/* Setting up oAuth2 with Guzzle for playing with Kiind */
+
+sudo apt-get install php5-curl
+
+add to composer.json:
+require "commerceguys/guzzle-oauth2-plugin": "1.0.0"
+
+php composer.phar update
+php composer.phar install
+
+added oauth keys for kiind in private/kiind_api_key.json
+
