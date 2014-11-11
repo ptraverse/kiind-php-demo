@@ -1,11 +1,8 @@
 Mini Project to Get Started with Kiind
 
 1. Create Git Repo in Folder under /workspace
-https://getcomposer.org/
-curl -sS https://getcomposer.org/installer | php
-2. Use/install Guzzle via Composer with PSR-0
+2. Add Guzzle via Composer
 http://guzzle.readthedocs.org/en/latest/overview.html#installation
-\<NamespaceName>(\<SubNamespaceNames>)*\<ClassName>
 3. Register Username/API Keys with Kiind
 4. Do a few tests of Guzzle+Kiind
 5. Push to Github!
@@ -14,7 +11,33 @@ http://guzzle.readthedocs.org/en/latest/overview.html#installation
 8. Classify owly with guzzle
 9. Run PHP Unit and Show some code coverage
 10. Push to Github!
-11. TODO- Get Kiind going!!!
+11. TODO- Get Kiind going
+	part 1. auth
+	part 2. token
+		2a, access
+		2b, refresh TODO
+		2c, test API TODO: Finish Create Gift, Disburse Gift
+	part 3. add gift
+	part 4. give gift
 11.5 Create CLI Prototype
 12. Add classes: Campaign, Link, User. 
-13. Add Doctrine ORM and use with Campaign, Link, User 
+13. Add Doctrine ORM and use with Campaign, Link, User, KiindGift, Kiind
+14. add monolog
+15. add routing
+16. get kiind token after auth
+17. cli prototype:
+	-create user
+	-create kiind gift
+	-create campaign using kiind gift
+	-create another user
+	-participate in campaign
+	-create another user
+	-participate in campaign using previous users link
+	-finish campaign
+	-send kiind gift
+	-participate in campaign post campaign finish 
+	-participate in campaign without user
+18. Phpunit Test each of above
+19. Push to github!
+20. DB Logging Kiind actions?
+21. Make it look nicer!

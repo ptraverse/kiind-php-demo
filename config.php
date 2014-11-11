@@ -1,18 +1,56 @@
 <?php
+
 require 'vendor/autoload.php';
 
-//Define OWLY_API_KEY and OWLY_BASE_URL
-$owly_api_key_file = file_get_contents("./private/owly_api_key.json");
-$owly_api_key_array = json_decode($owly_api_key_file, TRUE);
-define("OWLY_API_KEY",(string)($owly_api_key_array['owly_api_key']));
-define("OWLY_BASE_URL",(string)($owly_api_key_array['base_url']));
+
+/*********************************************
+ * Logging
+*********************************************/
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+// create a log channel
+$debug = new Logger('debug');
+$debug->pushHandler(new StreamHandler('log/debug.log', Logger::DEBUG));
+
+/* e.g, add records to the log */
+// $debug->addDebug($_SERVER['REQUEST_URI'],array('foo'=>'bar','baz'=>'123asdf'));
+
+
+
+/*********************************************
+ * Session Manager
+*********************************************/
+
+use Symfony\Component\HttpFoundation\Session\Session;
+$session = new Session();
+$session->start();
+
+/* eg. set and get session attributes */
+// $session->set('name', 'Drak');
+// $debug->addDebug($session->get('name'),array("sessionGetName"));
+
+/* eg. set flash messages */
+// $session->getFlashBag()->add('notice', 'Profile updated');
+
+/* eg. retrieve messages */
+// foreach ($session->getFlashBag()->get('notice', array()) as $message) {
+//     echo '<div class="flash-notice">'.$message.'</div>';
+// }
+
+
+
+/*********************************************
+ * DB Connections
+*********************************************/
 
 //Set up DBAL with Doctrine
 $dbal_config = new \Doctrine\DBAL\Configuration();
+
 //use private file with $connectionOptions array
 include('private/mysql.php');
 $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionOptions, $dbal_config);
-
 
 //EntityManager
 use Doctrine\ORM\Tools\Setup;
@@ -29,9 +67,11 @@ $driver = new AnnotationDriver(new AnnotationReader(), $paths);
 // registering noop annotation autoloader - allow all annotations by default
 AnnotationRegistry::registerLoader('class_exists');
 $config->setMetadataDriverImpl($driver);
+
 //use private file with $connectionOptions array
 include('private/mysql.php');
 $em = EntityManager::create($connectionOptions, $config);
+
 //make sure db connection works!
 try {
 	$em->getConnection()->connect();
@@ -41,3 +81,33 @@ try {
 	var_dump($e);
 	echo "\nNo Database Connection!\n";exit;
 }
+
+
+
+
+/*********************************************
+ * API Keys
+*********************************************/
+
+//Define OWLY_API_KEY and OWLY_BASE_URL
+$owly_api_key_file = file_get_contents("./private/owly_api_key.json");
+$owly_api_key_array = json_decode($owly_api_key_file, TRUE);
+define("OWLY_API_KEY",(string)($owly_api_key_array['owly_api_key']));
+define("OWLY_BASE_URL",(string)($owly_api_key_array['base_url']));
+
+//Define KIIND_CLIENT_ID, KIIND_CLIENT_SECRET, KIIND_BASE_URL
+$kiind_api_key_file = file_get_contents("./private/kiind_api_key.json");
+$kiind_api_key_array = json_decode($kiind_api_key_file, TRUE);
+define("KIIND_CLIENT_ID",(string)($kiind_api_key_array['client_id']));
+define("KIIND_CLIENT_SECRET",(string)($kiind_api_key_array['client_secret']));
+define("KIIND_BASE_URL",(string)($kiind_api_key_array['base_url']));
+define("KIIND_REDIRECT_URI",(string)($kiind_api_key_array['redirect_uri']));
+
+
+
+
+/*********************************************
+ * TODO: Routing
+*********************************************/
+
+
