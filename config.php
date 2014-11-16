@@ -42,6 +42,30 @@ $session->start();
 
 
 /*********************************************
+ * UserAuth Manager - Cartalyst/Sentry
+*********************************************/
+// Import the necessary classes
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+// Create the Sentry alias
+class_alias('Cartalyst\Sentry\Facades\Native\Sentry', 'Sentry');
+
+// Create a new Database connection
+$capsule = new Capsule;
+
+$capsule->addConnection([
+		'driver'    => 'mysql',
+		'host'      => 'localhost',
+		'database'  => 'qp',
+		'username'  => 'root',
+		'password'  => '',
+		'charset'   => 'utf8',
+		'collation' => 'utf8_unicode_ci',
+		]);
+
+$capsule->bootEloquent();
+
+/*********************************************
  * DB Connections
 *********************************************/
 
@@ -102,12 +126,5 @@ define("KIIND_CLIENT_ID",(string)($kiind_api_key_array['client_id']));
 define("KIIND_CLIENT_SECRET",(string)($kiind_api_key_array['client_secret']));
 define("KIIND_BASE_URL",(string)($kiind_api_key_array['base_url']));
 define("KIIND_REDIRECT_URI",(string)($kiind_api_key_array['redirect_uri']));
-
-
-
-
-/*********************************************
- * TODO: Routing
-*********************************************/
 
 

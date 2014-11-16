@@ -1,0 +1,90 @@
+User Package: Cartalyst/Sentry
+
+require "cartalyst/sentry": "2.1.*"
+require "illuminate/database": "5.0.*@dev"
+require "ircmaxell/password-compat": "1.0.3"
+
+run everything under cartalyst/sentry/schema/mysql.sql
+
+change entity under classes for user to use `users` table specified in mysql.sql
+	and use the same columns!
+	
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `permissions` text COLLATE utf8_unicode_ci,
+  `activated` tinyint(4) NOT NULL DEFAULT '0',
+  `activation_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `activated_at` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_login` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `persist_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_password_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `pin` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`),
+  KEY `users_activation_code_index` (`activation_code`),
+  KEY `users_reset_password_code_index` (`reset_password_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+use Doctrine\ORM\Mapping AS ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="users")
+ */
+class User
+{
+	/** 
+	 * @ORM\Id 
+	 * @ORM\Column(type="integer") 
+	 * @ORM\GeneratedValue  
+	*/
+	private $id;
+	
+	/** @ORM\Column(length=255) */
+	private $email;
+	
+	/** @ORM\Column(length=255) */
+	private $password;
+	
+	/** @ORM\Column(type="text") */
+	private $permissions;
+	
+	/** @ORM\Column(type="boolean") */
+	private $activated;
+	
+	/** @ORM\Column(length=255) */
+	private $activation_code;
+	
+	/** @ORM\Column(length=255) */
+	private $activated_at;
+	
+	/** @ORM\Column(length=255) */
+	private $last_login;
+	
+	/** @ORM\Column(length=255) */
+	private $persist_code;
+	
+	/** @ORM\Column(length=255) */
+	private $reset_password_code;
+	
+	/** @ORM\Column(length=255) */
+	private $first_name;
+	
+	/** @ORM\Column(length=255) */
+	private $last_name;
+	
+	/** @ORM\Column(type="datetime") */
+	private $created_at;
+	
+	/** @ORM\Column(type="datetime") */
+	private $updated_at;
+	
+	/** @ORM\Column(length=4) */
+	private $pin;

@@ -11,10 +11,10 @@ class KiindApiService
 	public function __construct($session)
 	{
 		$this->api_url = KIIND_BASE_URL;
-		$this->authorize_endpoint = KIIND_BASE_URL."/oauth/userlogin"; 
+		$this->authorize_endpoint = KIIND_BASE_URL."oauth/userlogin"; 
 		$this->client_id = KIIND_CLIENT_ID;
 		$this->client_secret = KIIND_CLIENT_SECRET;
-		$this->token_endpoint = KIIND_BASE_URL."/oauth/token";
+		$this->token_endpoint = KIIND_BASE_URL."oauth/token";
 		$this->redirect_uri = KIIND_REDIRECT_URI;
 		$this->guzzle = new Guzzle\Http\Client();
 		if (isset($session))
@@ -65,6 +65,34 @@ class KiindApiService
 		{
 			return TRUE;
 		}		
+	}
+	
+	public function getRefreshTokens()
+	{
+		$token_endpoint = $this->token_endpoint;
+		$token_array = array(
+				"grant_type" => "refresh_token", 	//must always be "refresh_token"
+				"refresh_token" => $this->session->get('tokens/kiind/refresh_token'),
+				"client_id" => KIIND_CLIENT_ID,
+				"client_secret" => KIIND_CLIENT_SECRET
+		);
+		
+		$request = $this->guzzle->createRequest('POST', $token_endpoint);
+		$query = $request->getQuery();
+		foreach ($token_array as $k=>$v)
+		{
+			$query->set($k, $v);
+		}
+		$res = $this->guzzle->send($request);
+		$tokens = $res->json();
+		
+		$this->session->set('tokens/kiind/access_token', $tokens['access_token']);
+		$this->session->set('tokens/kiind/refresh_token', $tokens['refresh_token']);
+		$this->session->set('tokens/kiind/expires_in', $tokens['expires_in']);
+		$this->session->set('tokens/kiind/acquired', date('Y-m-d H:i:s'));
+		$this->session->set('tokens/kiind/expires', date('Y-m-d H:i:s',(time()+(int)($tokens['expires_in']/1000))));
+		
+		return $this->session->has('tokens/kiind/access_token');
 	}
 	
 	public function getAuthRedirect()
@@ -121,7 +149,15 @@ class KiindApiService
 		$request = $this->guzzle->createRequest('GET', $papi_url);
 		$query = $request->getQuery();
 		$query->set('access_token', $this->session->get('tokens/kiind/access_token'));
-		$res = $this->guzzle->send($request);
+		try 
+		{
+			$res = $this->guzzle->send($request);
+		}
+		catch (Exception $e)
+		{
+			global $debug;
+			$debug->addDebug($request,array('Guzzle CHECKAUTH Request'));
+		}
 		$response = $res->json();		
 		return (bool)($response['info']['name']=='Credentials are valid');
 	}
@@ -174,9 +210,34 @@ class KiindApiService
 		throw new Exception('Not Yet Implemented!');
 	}
 	
-	public function apiCampaign()
+	public function apiListCampaigns()
 	{
-		throw new Exception('Not Yet Implemented!');
+		$papi_url = $this->api_url."papi/v1/campaign";
+		$headers = array(
+			'Accept'=>'application/json',
+			'Authorization'=>'Bearer '.$this->session->get('tokens/kiind/access_token'),
+		);
+		$request = $this->guzzle->get($papi_url,$headers);
+				
+		try
+		{
+			$res = $this->guzzle->send($request);
+			$response = $res->json();
+			return $response;
+		}
+		catch (	Exception $e )
+		{
+			global $debug;
+			$debug->addDebug($e,array('Guzzle EXCEPTION'));
+			$curl_string = 'curl -k -X POST ';
+			foreach ($headers as $k=>$v)
+			{
+				$curl_string .= '-H "'.$k.': '.$v.'" ';
+			}
+			$curl_string .= ' '.$papi_url.' ';
+			$debug->addDebug($curl_string,array('Curl String'));
+			return "Exception from Kiind. Check Debug Log.";
+		}
 	}
 	
 	/**
@@ -196,7 +257,6 @@ class KiindApiService
 	 * 	quote Optional
 	 * @return unknown
 	 */
-	//TODO - Finish this fucker
 	public function apiCreateCampaign($params)
 	{
 		if (is_array($params))
@@ -208,27 +268,31 @@ class KiindApiService
 			$json_params = $params;
 		}
 		$headers = array(
-				'Content-Type'=>'application/json',
-				'Accept'=>'application/json',
-				'Authorization'=>'Bearer '.$this->session->get('tokens/kiind/access_token'),
+			'Accept'=>'application/json',
+			'Content-Type'=>'application/json',			
+			'Authorization'=>'Bearer '.$this->session->get('tokens/kiind/access_token'),
 		);
 		$papi_url = $this->api_url."papi/v1/campaign";
-		$request = $this->guzzle->post($papi_url,$headers);	
-		$request->setBody($json_params,'application/json');
+		$request = $this->guzzle->post($papi_url,$headers,$json_params);				
+		
 		try 
 		{
 			$res = $this->guzzle->send($request);
 			$response = $res->json();
-			return "Workd!!";
+			return $response;
 		}
 		catch (	Exception $e )
-		{				
-			echo __FILE__.":".__LINE__."\n";		
-			var_dump($e);			
-			echo __FILE__.":".__LINE__."\n";
-			var_dump($request);
-			echo __FILE__.":".__LINE__."\n";
-			return "Nope";				
+		{						
+			global $debug;
+			$debug->addDebug($e,array('Guzzle EXCEPTION'));
+			$curl_string = 'curl -k -X POST ';
+			foreach ($headers as $k=>$v)
+			{
+				$curl_string .= '-H "'.$k.': '.$v.'" ';
+			}
+			$curl_string .= '-d '."'".$json_params."'".' '.$papi_url.' ';
+			$debug->addDebug($curl_string,array('Curl String'));
+			return "Exception from Kiind. Check Debug Log.";				
 		}
 		
 	}

@@ -4,6 +4,7 @@ use Doctrine\ORM\Mapping AS ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="users")
  */
 class User
 {
@@ -13,10 +14,46 @@ class User
 	 * @ORM\GeneratedValue  
 	*/
 	private $id;
-	/** @ORM\Column(length=140) */
+	
+	/** @ORM\Column(length=255) */
 	private $email;
-	/** @ORM\Column(length=140) */
+	
+	/** @ORM\Column(length=255) */
 	private $password;
+	
+	/** @ORM\Column(type="text") */
+	private $permissions;
+	
+	/** @ORM\Column(type="boolean") */
+	private $activated;
+	
+	/** @ORM\Column(length=255) */
+	private $activation_code;
+	
+	/** @ORM\Column(length=255) */
+	private $activated_at;
+	
+	/** @ORM\Column(length=255) */
+	private $last_login;
+	
+	/** @ORM\Column(length=255) */
+	private $persist_code;
+	
+	/** @ORM\Column(length=255) */
+	private $reset_password_code;
+	
+	/** @ORM\Column(length=255) */
+	private $first_name;
+	
+	/** @ORM\Column(length=255) */
+	private $last_name;
+	
+	/** @ORM\Column(type="datetime") */
+	private $created_at;
+	
+	/** @ORM\Column(type="datetime") */
+	private $updated_at;
+	
 	/** @ORM\Column(length=4) */
 	private $pin;
 	
