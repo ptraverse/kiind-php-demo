@@ -106,9 +106,6 @@ try {
 	echo "\nNo Database Connection!\n";exit;
 }
 
-
-
-
 /*********************************************
  * API Keys
 *********************************************/
@@ -127,4 +124,19 @@ define("KIIND_CLIENT_SECRET",(string)($kiind_api_key_array['client_secret']));
 define("KIIND_BASE_URL",(string)($kiind_api_key_array['base_url']));
 define("KIIND_REDIRECT_URI",(string)($kiind_api_key_array['redirect_uri']));
 
+
+/*********************************************
+ * Routing
+*********************************************/
+require_once('glue.php');
+
+
+/*********************************************
+ * Development Settings
+*********************************************/
+
+if (file_exists('./private/config_override.php'))
+{
+	require_once('./private/config_override.php');
+}
 

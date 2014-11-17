@@ -1,29 +1,39 @@
 <?php
 
-require_once('./config.php');
-
-if ( ! Sentry::check()) //Not Logged In
+require_once('config.php');  
+    
+$urls = array(
+	'/' => 'welcome',
+);
+    
+try 
 {
-	echo "<h3>No User</h3>";
-	echo '<a href="login.php">Log In</a> or <a href="register.php">Sign Up</a>';
+	glue::stick($urls);
 }
-else
+catch (Exception $e)
 {
-	$user = Sentry::getUser();
-	echo '<h3>Welcome, '.$user->email.'</h3>';
-	echo '<br><br>';
-	echo '<a href="createKiindGift.php">Create Kiind Gift</a>';
-	echo '<br><br>';	
-	echo '<a href="logout.php">Log Out</a>';
-	echo '<br><br>';
+	if ($e->getCode()=='404')
+	{
+		header("HTTP/1.1 404 Not Found");
+		echo '<h1>404!</h1>';
+	}
+	else 
+	{
+		header("HTTP/1.1 500 Internal Server Error");
+		echo '<h1>500!</h1>';		
+	}
+	
+	if ($development_server==TRUE)
+	{
+		if (isset($e->xdebug_message))
+		{
+			echo '<table>'.$e->xdebug_message.'</table>';
+		}
+		echo '<pre>';
+		var_dump($e);
+		echo '</pre>';
+	}
 }
-
-
-
-
-
-
-
 
 
 ?>

@@ -1,0 +1,22 @@
+wget https://raw.githubusercontent.com/jtopjian/gluephp/master/glue.php
+
+vim ./.htaccess
+	RewriteEngine On 
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule . /index.php
+	
+vim ./.index.php
+<?php
+    require_once('glue.php');
+    $urls = array(
+        '/' => 'index'
+    );
+    class index {
+        function GET() {
+            echo "Hello, World!";
+        }
+    }
+    glue::stick($urls);
+?>
+	

@@ -4,6 +4,7 @@ curl -sS https://getcomposer.org/installer | php
 //initialize composer json file
 touch composer.json
 echo "{}" >> composer.json
+// (or php composer.phar init)
 
 //install composer (no packages yet. will auto install the autoloader)
 php ./composer.phar install
@@ -26,5 +27,5 @@ sudo add-apt-repository ppa:ondrej/php5-oldstable
 sudo apt-get update
 sudo apt-get install php5
 
-//try to use composer again... :)
+//use composer again... :)
 php ./composer.phar install

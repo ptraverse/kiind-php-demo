@@ -1,0 +1,10 @@
+"drush/drush": "6.4.0"
+./vendor/bin/drush dl drupal
+
+cp drupal-7.33/sites/default/default.settings.php drupal-7.33/sites/default/settings.php
+chmod 666 drupal-7.33/sites/default/settings.php 
+chmod a+w drupal-7.33/sites/default
+
+sudo apt-get install php5-gd
+
+NOT THE RIGHT TOOL FOR THE JOB. Moved into a different repo.
