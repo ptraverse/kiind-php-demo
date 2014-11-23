@@ -2,9 +2,24 @@
 
 class welcome 
 {
+	private $twig;
 	
-	function GET() 
+	public function __construct()
 	{
-		echo 'Hello, World!<br><a href="/garbage/login.php">Log In</a>';			
+		global $twig;
+		$this->twig = $twig;
+	}
+	
+	public function GET() 
+	{		
+		if ( ! Sentry::check()) //Not Logged In
+		{
+			echo $this->twig->render('welcome.html.twig');
+		}
+		else
+		{
+			$user = Sentry::getUser();
+			echo $this->twig->render('home.html.twig',array('user'=>$user));
+		}				
 	}
 }

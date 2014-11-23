@@ -1,0 +1,21 @@
+@CHARSET "ISO-8859-1";
+
+.center
+{
+	text-align: center;
+}
+
+.btn-round
+{
+	width:40px;
+  	height:40px;
+  	border-radius:50%;
+}
+
+
+
+.li-sidebar
+{
+	list-style-type: none;
+	padding-top: 20px;
+}

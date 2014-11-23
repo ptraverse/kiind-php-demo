@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+<div class="center">
+<h1>What is Quidprize?</h1>
+<ul>
+<li>It's a <i class="fa fa-futbol-o fa-2x"></i> that incentivizes <i class="fa fa-user fa-2x"></i>s to get <i class="fa fa-hand-o-up fa-2x"></i>s in order to win <i class="fa fa-dollar fa-2x"></i><i class="fa fa-dollar fa-2x"></i><i class="fa fa-dollar fa-2x"></i></li>
+<br />
+<li>It's a way for <i class="fa fa-building fa-2x" ></i>s to advertise using giftcards (which turn in to revenue in the long run)</li>
+<br />
+<li>It's a fun project for <i class="fa fa-thumbs-up fa-2x" ></i><i class="fa fa-thumbs-up fa-2x" ></i> to show off his <i class="fa fa-code fa-2x" ></i></li>
+</ul>
+<br />
+<h3>Sign Up</h3>
+If you'd like to join, <a href="/sign_up">sign up here</a>. 
+<br />
+If you forgot your password, you can <a href="/reset_password">reset it again</a>.
+<br />
+If you were just curious, <a href="/">go back home</a>.
+<br />
+<div>
+<h3>Powered By</h3><br/>
+<a href="http://www.kiind.me" target="_blank">
+<img src="https://staticimageskiind.s3.amazonaws.com/logo/kiind-logo-home.png" style="width: 75px;">
+</a>
+<br /> <br />
+<a href="http://ow.ly" target="_blank">
+<img src="http://ow.ly/images/new/shorten/logo-owly.png" >
+</a>
+</div>
+
+</div>
+{% endblock %}

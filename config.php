@@ -132,6 +132,12 @@ require_once('glue.php');
 
 
 /*********************************************
+ * Twig Templates 
+*********************************************/
+$loader = new Twig_Loader_Filesystem("./views");
+$twig = new Twig_Environment($loader);
+
+/*********************************************
  * Development Settings
 *********************************************/
 

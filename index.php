@@ -3,7 +3,10 @@
 require_once('config.php');  
     
 $urls = array(
-	'/' => 'welcome',
+	'/' => 'welcome',					//GET
+	'/login' => 'login', 				//POST
+	'/logout' => 'login', 				//GET
+	'/(.+)'	=> 'static_pages',			//GET
 );
     
 try 

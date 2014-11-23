@@ -98,6 +98,5 @@ class User
 		{
 			throw new Exception("Property ".$property." is an invalid property.");
 		}
-	}
-	
+	}	
 }
