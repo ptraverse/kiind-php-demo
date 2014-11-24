@@ -50,7 +50,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 // Create the Sentry alias
 class_alias('Cartalyst\Sentry\Facades\Native\Sentry', 'Sentry');
 
-// Create a new Database connection
+// Create a new Database connection (Sentry-specific!)
 $capsule = new Capsule;
 
 $capsule->addConnection([
@@ -96,14 +96,21 @@ $config->setMetadataDriverImpl($driver);
 include('private/mysql.php');
 $em = EntityManager::create($connectionOptions, $config);
 
+// e.g. Create a User object, Check if Exists, Save it to the Database
+// $user = new User($email,$password,$password_confirm);
+// $exists = $em->getRepository('User')->findOneBy(array('email' => $email));
+// if ($exists==FALSE)
+// {
+// 	$em->persist($user);
+// 	$em->flush();
+// }
+
 //make sure db connection works!
 try {
 	$em->getConnection()->connect();
 	$em->getConnection()->close();
-	
 } catch (\Exception $e) {
-	var_dump($e);
-	echo "\nNo Database Connection!\n";exit;
+	throw new Exception("No Database Connection!","500");
 }
 
 /*********************************************
@@ -134,7 +141,7 @@ require_once('glue.php');
 /*********************************************
  * Twig Templates 
 *********************************************/
-$loader = new Twig_Loader_Filesystem("./views");
+$loader = new Twig_Loader_Filesystem("./templates");
 $twig = new Twig_Environment($loader);
 
 /*********************************************

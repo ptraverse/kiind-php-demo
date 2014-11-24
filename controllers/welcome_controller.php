@@ -1,14 +1,7 @@
 <?php
 
-class welcome 
+class welcome_controller extends base_controller
 {
-	private $twig;
-	
-	public function __construct()
-	{
-		global $twig;
-		$this->twig = $twig;
-	}
 	
 	public function GET() 
 	{		

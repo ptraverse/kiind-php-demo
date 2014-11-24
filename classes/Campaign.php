@@ -1,5 +1,7 @@
 <?php
 
+use Doctrine\ORM\Mapping AS ORM;
+
 /**
  * @ORM\Entity
  */
@@ -15,15 +17,11 @@ class Campaign
 	private $longUrl;
 	/** @ORM\Column(length=24) */
 	private $shortName;
-	/** 
-	 * @ORM\ManyToOne(targetEntity="User")
-	 * TODO - Finish This Relationship
-	 */
+	/** @ORM\Column(type="integer") */
 	private $user;
 	
 	public function __construct($longUrl,$shortName,$userId)
 	{
-		$this->id = '1'; //TODO
 		$this->longUrl = $longUrl;
 		$this->shortName = $shortName;
 		$this->userId = $userId;

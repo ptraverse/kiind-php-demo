@@ -1,6 +1,6 @@
 <?php
 
-class static_pages extends view_controller
+class static_pages_controller extends base_controller
 {
 	public function __construct()
 	{
@@ -9,7 +9,7 @@ class static_pages extends view_controller
 	
 	public function GET($matches)
 	{
-		if (isset($matches[1]) && $matches[1]>'')
+		if (isset($matches[1]))
 		{
 			if ($matches[1]=='help')
 			{
@@ -17,12 +17,16 @@ class static_pages extends view_controller
 			}
 			elseif ($matches[1]=='')
 			{
-				//TODO - add more static pages here
+				throw new Exception("Static Page Name Blank","400");
 			}
+			else
+			{
+				throw new Exception("Static Page '$matches[1]' Not Yet Implemented","404");
+			}			
 		}
 		else
 		{
-			throw new Exception("No Static Page Specified","505");
+			throw new Exception("Static Page Not Specified","400");
 		}
 	}
 	

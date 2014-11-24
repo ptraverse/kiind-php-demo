@@ -3,10 +3,11 @@
 require_once('config.php');  
     
 $urls = array(
-	'/' => 'welcome',					//GET
-	'/login' => 'login', 				//POST
-	'/logout' => 'login', 				//GET
-	'/(.+)'	=> 'static_pages',			//GET
+	'/' => 			'welcome_controller',			//GET
+	'/campaign' => 	'campaign_controller',			//GET
+	'/login' => 	'login_controller',				//POST
+	'/logout' => 	'login_controller', 			//GET
+	'/(.+)'	=> 		'static_pages_controller',		//GET
 );
     
 try 
