@@ -60,16 +60,16 @@
                         if (method_exists($obj, $method)) {
                             $obj->$method($matches);
                         } else {
-                            throw new BadMethodCallException("Method, $method, not supported.");
+                            throw new BadMethodCallException("Method '$method' not supported.","500");
                         }
                     } else {
-                        throw new Exception("Class, $class, not found.");
+                        throw new Exception("Class '$class' not found.","500");                       
                     }
                     break;
                 }
             }
             if (!$found) {
-                throw new Exception($path,"404");
+                throw new Exception("Path '$path' not implemented","404");
             }
         }
     }

@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block sidebar %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="main center">
+	<h3>Campaigns</h3>
+	<h4><a href="/campaign/create"><i class="fa fa-plus-square-o"></i> Create New Campaign</a></h4>	
+	<table class="center" align="center" border="1">
+		<tr>
+			<th>Short Name</th>
+			<th>Long Url</th>
+		</tr>
+	{% for c in campaigns %}		
+		<tr>
+			<td>{{ c.shortName }}</td>
+			<td>{{ c.longUrl }}</td>
+		</tr>
+	{% else %}
+		<tr>
+			<td>No campaigns found</td>
+		</tr>		
+	{% endfor %}
+	</table>
+</div>
+{% endblock %}

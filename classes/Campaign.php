@@ -12,13 +12,13 @@ class Campaign
 	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue
 	 */
-	private $id;
+	public $id;
 	/** @ORM\Column(length=1024) */
-	private $longUrl;
+	public $longUrl;
 	/** @ORM\Column(length=24) */
-	private $shortName;
+	public $shortName;
 	/** @ORM\Column(type="integer") */
-	private $user;
+	public $user;
 	
 	public function __construct($longUrl,$shortName,$userId)
 	{

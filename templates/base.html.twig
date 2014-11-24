@@ -19,50 +19,55 @@
     <body>
     	{% block sidebar %}
     		{% if user %}
-    		<div id="sidebar">
-	    		<h3 class="center">{{ user.email }}</h3>
-				<br><br>
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul>
-						<li class="li-sidebar">
-							<a href="/">
-								<i class="fa fa-dashboard"></i> Dashboard
-							</a>
-						</li>
+    		<div id="sidebar" class="col-md-2 sidebar">
+				<h5 class="center">{{ user.email }}</h5>
+				<img src="/css/qpwhite.png" class="center" height="90px" style="padding-bottom:10px;padding-top:10px;" >
+				<ul class="ul-sidebar">
+					<li class="li-sidebar">
+						<a href="/">
+							<i class="fa fa-dashboard"></i> Dashboard
+						</a>
+					</li>
+					
+					<li class="li-sidebar">
+						<a href="/user/{{ user.id }}/link">
+							<i class="fa fa-link"></i> Links
+						</a>
+					</li>
+					
+					<li class="li-sidebar">						
+						<a href="/campaign">
+							<i class="fa fa-dollar"></i> Campaigns
+						</a>
+					</li>													
 						
-						<li class="li-sidebar">
-							<a href="/user/{{ user.id }}/link">
-								<i class="fa fa-link"></i> Links
-							</a>
-						</li>
-						
-						<li class="li-sidebar">						
-							<a href="/campaign">
-								<i class="fa fa-dollar"></i> Campaigns
-							</a>
-						</li>													
-							
-						<br />	
-											
-						<li class="li-sidebar">						
-							<a href="/user/{{ user.id }}/edit">
-								<i class="fa fa-user"></i> Profile
-							</a>
-						</li>
-						
-						<br />
-						
-						<li class="li-sidebar">						
-							<a href="/logout">
-								<i class="fa fa-sign-out"></i> Log Out
-							</a>
-						</li>	
-					</ul>
-				</div>
+					<br />	
+					<hr>
+					<br />						
+										
+					<li class="li-sidebar">						
+						<a href="/user/{{ user.id }}/edit">
+							<i class="fa fa-user"></i> Profile
+						</a>
+					</li>
+					
+					<br />
+					<hr>
+					<br />
+					
+					<li class="li-sidebar">						
+						<a href="/logout">
+							<i class="fa fa-sign-out"></i> Log Out
+						</a>
+					</li>	
+				</ul>				
 			</div>
+			{% else %}
+				<div class="col-md-2">&nbsp;</div>
 			{% endif %}
         {% endblock %}
-        <div id="content">{% block content %}{% endblock %}</div>
+        <div id="content" class="col-md-8">{% block content %}{% endblock %}</div>
+        <div id="right" class="col-md-2">{% block right %}{% endblock %}</div>
         <div id="footer">{% block footer %}{% endblock %}</div>
     </body>
 </html>

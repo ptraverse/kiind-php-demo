@@ -7,7 +7,7 @@ $urls = array(
 	'/campaign' => 	'campaign_controller',			//GET
 	'/login' => 	'login_controller',				//POST
 	'/logout' => 	'login_controller', 			//GET
-	'/(.+)'	=> 		'static_pages_controller',		//GET
+	'/([a-z]+)'	=> 	'static_pages_controller',		//GET
 );
     
 try 
@@ -16,16 +16,8 @@ try
 }
 catch (Exception $e)
 {
-	if ($e->getCode()=='404')
-	{
-		header("HTTP/1.1 404 Not Found");
-		echo '<h1>404!</h1>';
-	}
-	else 
-	{
-		header("HTTP/1.1 500 Internal Server Error");
-		echo '<h1>500!</h1>';		
-	}
+	header("HTTP/1.1 ".$e->getCode());
+	echo '<h1>'.$e->getCode().'!</h1>';	
 	
 	if ($development_server==TRUE)
 	{
@@ -33,6 +25,7 @@ catch (Exception $e)
 		{
 			echo '<table>'.$e->xdebug_message.'</table>';
 		}
+		echo '<hr>';
 		echo '<pre>';
 		var_dump($e);
 		echo '</pre>';
