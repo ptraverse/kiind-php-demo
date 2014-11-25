@@ -22,8 +22,8 @@ class Campaign
 	
 	public function __construct($long_url,$short_name,$user_id)
 	{
-		$this->$long_url = $long_url;
-		$this->$short_name = $short_name;
+		$this->long_url = $long_url;
+		$this->short_name = $short_name;
 		$this->user = $user_id;
 	}
 	

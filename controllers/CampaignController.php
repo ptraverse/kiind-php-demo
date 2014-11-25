@@ -35,7 +35,7 @@ class CampaignController extends LoginRequiredController
 				$c_long_url = mysql_real_escape_string($_REQUEST['long_url']);
 				$c_short_name = mysql_real_escape_string($_REQUEST['short_name']);
 				$c = new Campaign($c_long_url,$c_short_name,$this->user->id);
-				$exists = $this->em->getRepository('Campaign')->findOneBy(array('longUrl'=>$c_long_url,'shortName'=>$c_short_name));
+				$exists = $this->em->getRepository('Campaign')->findOneBy(array('long_url'=>$c_long_url,'short_name'=>$c_short_name));
 				if ($exists==FALSE)
 				{
 					$this->em->persist($c);
