@@ -1,6 +1,6 @@
 <?php
 
-class static_pages_controller extends base_controller
+class StaticPagesController extends BaseController
 {
 	public function __construct()
 	{
@@ -14,11 +14,7 @@ class static_pages_controller extends base_controller
 			if ($matches[1]=='help')
 			{
 				$this->help();
-			}
-			elseif ($matches[1]=='')
-			{
-				throw new Exception("Static Page Name Blank","400");
-			}
+			}			
 			else
 			{
 				throw new Exception("Static Page '$matches[1]' Not Yet Implemented","404");

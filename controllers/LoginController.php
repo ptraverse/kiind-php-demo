@@ -1,6 +1,6 @@
 <?php
 
-class login_controller
+class LoginController
 {
 	
 	public function POST() //log IN

@@ -1,6 +1,6 @@
 <?php
 
-class base_controller
+class BaseController
 {
 	protected $twig; 
 	protected $em;

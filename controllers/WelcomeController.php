@@ -1,6 +1,6 @@
 <?php
 
-class welcome_controller extends base_controller
+class WelcomeController extends BaseController
 {
 	
 	public function GET() 

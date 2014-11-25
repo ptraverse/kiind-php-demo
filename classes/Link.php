@@ -7,18 +7,18 @@ class Link
 	
 	private $hash;
 	
-	private $shortUrl;
+	private $short_url;
 	
-	private $longUrl;
+	private $long_url;
 	
-	private $userId;
+	private $user;
 	
-	private $campaignId;
+	private $campaign;
 	
-	public function __construct($campaignId,$userId)
+	public function __construct($campaign_id,$user_id)
 	{
-		$this->campaignId = $campaignId;
-		$this->userId = $userId;
+		$this->$campaign = $campaign_id;
+		$this->$campaign = $user_id;
 	}
 	
 	public function __get($property)

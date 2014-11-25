@@ -14,17 +14,17 @@ class Campaign
 	 */
 	public $id;
 	/** @ORM\Column(length=1024) */
-	public $longUrl;
+	public $long_url;
 	/** @ORM\Column(length=24) */
-	public $shortName;
+	public $short_name;
 	/** @ORM\Column(type="integer") */
 	public $user;
 	
-	public function __construct($longUrl,$shortName,$userId)
+	public function __construct($long_url,$short_name,$user_id)
 	{
-		$this->longUrl = $longUrl;
-		$this->shortName = $shortName;
-		$this->userId = $userId;
+		$this->$long_url = $long_url;
+		$this->$short_name = $short_name;
+		$this->user = $user_id;
 	}
 	
 	public function __get($property)

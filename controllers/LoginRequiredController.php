@@ -1,8 +1,9 @@
 <?php
 
-class login_required_controller extends base_controller
+class LoginRequiredController extends BaseController
 {
 	protected $user;
+	protected $session;
 	
 	public function __construct()
 	{
@@ -16,6 +17,8 @@ class login_required_controller extends base_controller
 		{
 			$user = Sentry::getUser();
 			$this->user = $user;	
+			global $session;
+			$this->session = $session;
 		}	
 	}
 	

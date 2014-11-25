@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block sidebar %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="main center">
+	<h3>Create Campaign</h3>
+	
+	<form class="form-horizontal" action="/campaign/create" method="POST">
+<fieldset>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="short_name"></label>
+  <div class="controls">
+    <input id="short_name" name="short_name" placeholder="Short Name" class="input-xlarge" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="long_url"></label>
+  <div class="controls">
+    <input id="long_url" name="long_url" placeholder="Destination URL" class="input-xlarge" type="text">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="control-group">
+  <label class="control-label" for="create_campaign"></label>
+  <div class="controls">
+    <button id="create_campaign" name="create_campaign" class="btn btn-primary">Create</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+	
+</div>
+{% endblock %}
