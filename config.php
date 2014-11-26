@@ -73,7 +73,7 @@ $capsule->bootEloquent();
 $dbal_config = new \Doctrine\DBAL\Configuration();
 
 //use private file with $connectionOptions array
-include('private/mysql.php');
+include($_SERVER['DOCUMENT_ROOT'].'/private/mysql.php');
 $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionOptions, $dbal_config);
 
 //EntityManager
@@ -83,7 +83,7 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
-$paths = array(__DIR__.'/classes');
+$paths = array($_SERVER['DOCUMENT_ROOT'].'/classes');
 $isDevMode = false;
 $config = Setup::createConfiguration($isDevMode);
 $driver = new AnnotationDriver(new AnnotationReader(), $paths);
@@ -93,7 +93,7 @@ AnnotationRegistry::registerLoader('class_exists');
 $config->setMetadataDriverImpl($driver);
 
 //use private file with $connectionOptions array
-include('private/mysql.php');
+include($_SERVER['DOCUMENT_ROOT'].'/private/mysql.php');
 $em = EntityManager::create($connectionOptions, $config);
 
 // e.g. Create a User object, Check if Exists, Save it to the Database
@@ -118,13 +118,13 @@ try {
 *********************************************/
 
 //Define OWLY_API_KEY and OWLY_BASE_URL
-$owly_api_key_file = file_get_contents("./private/owly_api_key.json");
+$owly_api_key_file = file_get_contents($_SERVER['DOCUMENT_ROOT']."/private/owly_api_key.json");
 $owly_api_key_array = json_decode($owly_api_key_file, TRUE);
 define("OWLY_API_KEY",(string)($owly_api_key_array['owly_api_key']));
 define("OWLY_BASE_URL",(string)($owly_api_key_array['base_url']));
 
 //Define KIIND_CLIENT_ID, KIIND_CLIENT_SECRET, KIIND_BASE_URL
-$kiind_api_key_file = file_get_contents("./private/kiind_api_key.json");
+$kiind_api_key_file = file_get_contents($_SERVER['DOCUMENT_ROOT']."/private/kiind_api_key.json");
 $kiind_api_key_array = json_decode($kiind_api_key_file, TRUE);
 define("KIIND_CLIENT_ID",(string)($kiind_api_key_array['client_id']));
 define("KIIND_CLIENT_SECRET",(string)($kiind_api_key_array['client_secret']));
@@ -135,21 +135,21 @@ define("KIIND_REDIRECT_URI",(string)($kiind_api_key_array['redirect_uri']));
 /*********************************************
  * Routing
 *********************************************/
-require_once('glue.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/glue.php');
 
 
 /*********************************************
  * Twig Templates 
 *********************************************/
-$loader = new Twig_Loader_Filesystem("./templates");
+$loader = new Twig_Loader_Filesystem($_SERVER['DOCUMENT_ROOT']."/templates");
 $twig = new Twig_Environment($loader);
 
 /*********************************************
  * Development Settings
 *********************************************/
 
-if (file_exists('./private/config_override.php'))
+if (file_exists($_SERVER['DOCUMENT_ROOT'].'/private/config_override.php'))
 {
-	require_once('./private/config_override.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/private/config_override.php');
 }
 

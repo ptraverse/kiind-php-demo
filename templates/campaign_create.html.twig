@@ -6,6 +6,7 @@
 
 {% block head %}
     {{ parent() }}
+    <script src="/js/campaign_create.js"></script>
 {% endblock %}
 
 {% block sidebar %}
@@ -16,32 +17,48 @@
 <div class="main center">
 	<h3>Create Campaign</h3>
 	
-	<form class="form-horizontal" action="/campaign/create" method="POST">
+	<form id="campaign_create_form" class="center form-horizontal" action="/campaign/create" method="POST">
 <fieldset>
 
 <!-- Text input-->
-<div class="control-group">
+<div class="form-group">
   <label class="control-label" for="short_name"></label>
-  <div class="controls">
-    <input id="short_name" name="short_name" placeholder="Short Name" class="input-xlarge" type="text">
+  <div class="controls col-md-4 center">
+    <input id="short_name" name="short_name" placeholder="Short Name" class="form-control" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
-<div class="control-group">
+<div class="form-group">
   <label class="control-label" for="long_url"></label>
-  <div class="controls">
-    <input id="long_url" name="long_url" placeholder="Destination URL" class="input-xlarge" type="text">
+  <div class="controls col-md-4 center">
+    <input id="long_url" name="long_url" placeholder="Destination URL" class="form-control" type="text">
     
   </div>
 </div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="control-label" for="selectbasic"></label>
+  <div class="controls col-md-4 center">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+    	<option value=''>--Select Gift Card--</option>
+      {% for gc in gift_cards %}
+      	<option value={{ gc.id }}>{{ gc.name }}</option>      
+      {% else %}
+      	<option>No Gift Cards Retrieved!</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
 
 <!-- Button -->
 <div class="control-group">
   <label class="control-label" for="create_campaign"></label>
   <div class="controls">
-    <button id="create_campaign" name="create_campaign" class="btn btn-primary">Create</button>
+    <button id="create_campaign" name="create_campaign" class="btn btn-black center">Create</button>
   </div>
 </div>
 

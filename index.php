@@ -1,6 +1,6 @@
 <?php
 
-require_once('config.php');  
+require_once($_SERVER['DOCUMENT_ROOT'].'/config.php');  
     
 $urls = array(
 	'/' => 						'WelcomeController',			//GET
@@ -8,6 +8,7 @@ $urls = array(
 	'/campaign/([a-z]+)' => 	'CampaignController',			//GET
 	'/login' => 				'LoginController',				//POST
 	'/logout' => 				'LoginController', 				//GET
+	'/auth/redirect(.*)' =>		'AuthController',				//GET
 	'/([a-z]+)'	=> 				'StaticPagesController',		//GET
 );
     

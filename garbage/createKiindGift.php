@@ -1,7 +1,6 @@
 <?php
 
-require_once('./config.php');
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
 $kas = new KiindApiService($session);
 
 if ($kas->checkTokens()==FALSE)
@@ -33,12 +32,15 @@ if ($kas->checkTokens()==TRUE)
 	echo __FILE__.":".__LINE__."<br>";
 	
 	//Get list of All Brands possible
-	$gift_cards = $kas->apiMarketplace();
+	$marketplace_params = array(
+		'limit' => 100
+	);
+	$gift_cards = $kas->apiMarketplace($marketplace_params);
 	foreach ($gift_cards['marketplace_gifts'] as $k=>$v)
 	{
 		echo $v['id'].': '.$v['name'].'<br>';
 	}
-	
+	/*
 	$createCampaignParams = array(
 		"message"=>"Thanks for all of the hard work on the API this week. Have lunch at Bliss on me.",
 		"subject"=>"Thanks For the Hard Work",
@@ -61,7 +63,8 @@ if ($kas->checkTokens()==TRUE)
 	);
 	
 	$create_response = $kas->apiCreateCampaign($createCampaignParams);
-	var_dump($create_response);	
+	var_dump($create_response);
+	*/	
 	
 }
 else

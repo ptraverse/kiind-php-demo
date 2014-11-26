@@ -18,13 +18,15 @@
 	<h4><a href="/campaign/create"><i class="fa fa-plus-square-o"></i> Create New Campaign</a></h4>	
 	<table class="center" align="center" border="1">
 		<tr>
-			<th>Short Name</th>
-			<th>Long Url</th>
+			<th class="center">Short Name</th>
+			<th class="center">Long Url</th>
+			<th class="center">My Link</th>
 		</tr>
 	{% for c in campaigns %}		
 		<tr>
-			<td>{{ c.shortName }}</td>
-			<td>{{ c.longUrl }}</td>
+			<td>{{ c.short_name }}</td>
+			<td>{{ c.long_url }}</td>
+			<td>TODO CreateLinkButton Or ShowLink</td>
 		</tr>
 	{% else %}
 		<tr>
