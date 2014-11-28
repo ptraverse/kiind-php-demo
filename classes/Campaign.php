@@ -19,12 +19,23 @@ class Campaign
 	public $short_name;
 	/** @ORM\Column(type="integer") */
 	public $user;
+	/** @ORM\Column(type="integer") */
+	public $gift_id;
+	/** @ORM\Column(type="float") */
+	public $gift_amount;
+	/** @ORM\Column(type="integer") */
+	public $clicks;
 	
-	public function __construct($long_url,$short_name,$user_id)
+	public $gift_card_name;
+	
+	public function __construct($long_url,$short_name,$user_id,$gift_id,$gift_amount,$clicks)
 	{
 		$this->long_url = $long_url;
 		$this->short_name = $short_name;
 		$this->user = $user_id;
+		$this->gift_id = $gift_id;
+		$this->gift_amount = $gift_amount;
+		$this->clicks = $clicks;
 	}
 	
 	public function __get($property)

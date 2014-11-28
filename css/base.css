@@ -1,48 +1,13 @@
 @CHARSET "ISO-8859-1";
 
-.center
+a
 {
-	text-align: center;
-	float: none;
-    margin: 0 auto;
+	color: #777777;
 }
 
-img.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.btn-round
+a:hover, a:focus
 {
-	width:40px;
-  	height:40px;
-  	border-radius:50%;
-}
-
-.sidebar
-{
-	border-right: 1px dotted grey;
-	padding-top: 10px;
-	height: 100%;
-}
-
-.li-sidebar
-{
-	
-	list-style-type: none;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
-	margin-left: 10px;
-}
-
-.ul-sidebar
-{
-	
-	padding-top: 10px;
-	padding-left: 10px;
-	margin-left: 10px;
+	color: #111111;
 }
 
 .btn-black 
@@ -81,14 +46,55 @@ img.center {
 	-webkit-font-smoothing: antialiased; 
 }
 
-a
+.btn-round
 {
-	color: #777777;
+	width:40px;
+  	height:40px;
+  	border-radius:50%;
 }
 
-a:hover, a:focus
+.center
 {
-	color: #111111;
+	text-align: center;
+	float: none;
+    margin: 0 auto;
+}
+
+.copied-message
+{
+	display: none;
+}
+
+.fa-facebook:active, .fa-facebook:hover
+{
+	color: #3b5998;
+}
+
+.fa-linkedin:active, .fa-linkedin:hover
+{
+	color: #007bb6;
+}
+
+.fa-pinterest:active, .fa-pinterest:hover
+{
+	color: #cb2027;
+}
+
+.fa-twitter:active, .fa-twitter:hover
+{
+	color: #4099FF;
+}
+
+
+.form-control[readonly]
+{
+	cursor: default;
+}
+
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 label.error
@@ -97,4 +103,39 @@ label.error
     font-weight: 700;
     margin-bottom: 5px;
     max-width: 100%;
+}
+
+.li-sidebar
+{
+	
+	list-style-type: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	margin-left: 10px;
+}
+
+.link-copy-input
+{
+	font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+}
+
+.share-div
+{
+	display: none;
+}
+
+.sidebar
+{
+	border-right: 1px dotted grey;
+	padding-top: 10px;
+	height: 100%;
+}
+
+.ul-sidebar
+{
+	
+	padding-top: 10px;
+	padding-left: 10px;
+	margin-left: 10px;
 }

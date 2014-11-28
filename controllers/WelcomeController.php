@@ -11,7 +11,7 @@ class WelcomeController extends BaseController
 		}
 		else
 		{
-			$user = Sentry::getUser();
+			$user = Sentry::getUser();			
 			echo $this->twig->render('home.html.twig',array('user'=>$user));
 		}				
 	}

@@ -8,7 +8,7 @@ class KiindApiService
 	private $api_url, $authorize_endpoint, $client_id, $client_secret, $token_endpoint, $redirect_uri, $guzzle;
 	public $session; 
 	
-	public function __construct($session)
+	public function __construct($session,$authorizing=FALSE)
 	{
 		$this->api_url = KIIND_BASE_URL;
 		$this->authorize_endpoint = KIIND_BASE_URL."oauth/userlogin"; 
@@ -17,10 +17,39 @@ class KiindApiService
 		$this->token_endpoint = KIIND_BASE_URL."oauth/token";
 		$this->redirect_uri = KIIND_REDIRECT_URI;
 		$this->guzzle = new Guzzle\Http\Client();
+		
 		if (isset($session))
 		{
 			$this->session = $session;
 		}
+		
+		if ($authorizing==FALSE) //prevent infinite looping
+		{
+			if ($this->checkTokens()==FALSE)
+			{
+				if ($this->checkSessionTokensExpiry()==FALSE)
+				{
+					try 
+					{
+						$this->getRefreshTokens();
+					}
+					catch (Guzzle\Http\Exception\ClientErrorResponseException $e) //CROCK!!
+					{
+						$this->getAuthRedirect();
+					}
+					
+					if ($this->checkTokens()==FALSE) //Didnt get refresh tokens?!
+					{
+						throw new Exception('Couldnt Get Kiind Tokens!','500');
+					}
+				}
+				else
+				{
+					$this->getAuthRedirect();
+				}
+			}
+		}
+		
 	}			
 	
 	public function checkTokens()
@@ -50,21 +79,28 @@ class KiindApiService
 	
 	public function checkSessionTokensExpiry()
 	{		
-		if ($this->session->has('tokens/kiind/expires'))
+		if ($this->session)
 		{
-			if ($this->session->get('tokens/kiind/expires') > date("Y-m-d H:i:s"))
+			if ($this->session->has('tokens/kiind/expires'))
+			{
+				if ($this->session->get('tokens/kiind/expires') > date("Y-m-d H:i:s"))
+				{
+					return TRUE;
+				}
+				else 
+				{
+					return FALSE;
+				}
+			}
+			else
 			{
 				return TRUE;
-			}
-			else 
-			{
-				return FALSE;
-			}
+			}	
 		}
 		else
 		{
 			return TRUE;
-		}		
+		}	
 	}
 	
 	public function getRefreshTokens()
@@ -177,7 +213,7 @@ class KiindApiService
 	 */
 	public function apiMarketplace($params = array())
 	{
-		$papi_url = $this->api_url."/papi/v1/marketplace";
+		$papi_url = $this->api_url."papi/v1/marketplace";
 		$request = $this->guzzle->createRequest('GET', $papi_url);
 		$query = $request->getQuery();
 		$query->set('access_token', $this->session->get('tokens/kiind/access_token'));
@@ -188,6 +224,21 @@ class KiindApiService
 		$res = $this->guzzle->send($request);
 		$response = $res->json();
 		return $response;
+	}
+	
+	//Shortcut to get the 1000 first Marketplace Gift Cards, Id and Name only
+	public function apiMarketplaceAllGifts()
+	{
+		//Get list of All Gift Cards
+		$marketplace_params = array(
+			'limit' => 1000
+		);
+		$gift_cards_resp = $this->apiMarketplace($marketplace_params);
+		foreach ($gift_cards_resp['marketplace_gifts'] as $k=>$v)
+		{
+			$gift_cards[$v['id']] = $v['name'];
+		}
+		return $gift_cards;
 	}
 	
 	public function apiMarketplaceId($id)

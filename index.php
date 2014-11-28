@@ -6,6 +6,9 @@ $urls = array(
 	'/' => 						'WelcomeController',			//GET
 	'/campaign' => 				'CampaignController',			//GET
 	'/campaign/([a-z]+)' => 	'CampaignController',			//GET
+	'/link/([a-z]+)/(\d+)' =>	'LinkController',				//GET
+	'/link/(\d+)' =>			'LinkController',				//GET
+	'/link' =>					'LinkController',				//GET
 	'/login' => 				'LoginController',				//POST
 	'/logout' => 				'LoginController', 				//GET
 	'/auth/redirect(.*)' =>		'AuthController',				//GET
@@ -30,6 +33,10 @@ catch (Exception $e)
 		echo '<hr>';
 		echo '<pre>';
 		var_dump($e);
+		echo '</pre>';
+		echo '<hr>';
+		echo '<pre>';
+		var_dump($session);
 		echo '</pre>';
 	}
 }

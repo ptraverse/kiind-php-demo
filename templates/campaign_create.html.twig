@@ -40,12 +40,12 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="control-label" for="selectbasic"></label>
+  <label class="control-label" for="gift_id"></label>
   <div class="controls col-md-4 center">
-    <select id="selectbasic" name="selectbasic" class="form-control">
+    <select id="gift_id" name="gift_id" class="form-control">
     	<option value=''>--Select Gift Card--</option>
-      {% for gc in gift_cards %}
-      	<option value={{ gc.id }}>{{ gc.name }}</option>      
+      {% for key,value in gift_cards %}      
+      	<option value={{ key }}>{{ value }}</option>      
       {% else %}
       	<option>No Gift Cards Retrieved!</option>
       {% endfor %}
@@ -54,11 +54,29 @@
 </div>
 
 
+<!-- Text input-->
+<div class="form-group">
+  <label class="control-label" for="gift_amount"></label>
+  <div class="controls col-md-4 center">
+    <input id="gift_amount" name="gift_amount" placeholder="Gift Amount (USD)" class="form-control" type="text">    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="control-label" for="clicks"></label>
+  <div class="controls col-md-4 center">
+    <input id="clicks" name="clicks" placeholder="Target Number of Clicks" class="form-control" type="text">    
+  </div>
+</div>
+
+
 <!-- Button -->
 <div class="control-group">
   <label class="control-label" for="create_campaign"></label>
   <div class="controls">
-    <button id="create_campaign" name="create_campaign" class="btn btn-black center">Create</button>
+    <button id="create_campaign" name="create_campaign" class="btn btn-black center" data-toggle="popover" 
+        data-content="">Create</button>
   </div>
 </div>
 
@@ -66,4 +84,5 @@
 </form>
 	
 </div>
+
 {% endblock %}

@@ -8,7 +8,7 @@ class AuthController extends LoginRequiredController
 		if (isset($_REQUEST['code']))
 		{
 			//Exchange the auth code for an access token and a refresh token
-			$kas = new KiindApiService($this->session);
+			$kas = new KiindApiService($this->session,TRUE);
 			$kas->getTokens($_REQUEST['code']);
 			if ($kas->checkSessionHasTokens()==TRUE)
 			{

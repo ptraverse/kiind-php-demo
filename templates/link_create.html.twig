@@ -1,0 +1,69 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <script src="/js/link_create.js"></script>
+    <script src="/js/ZeroClipboard.js"></script>
+{% endblock %}
+
+{% block sidebar %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="main center">
+	<h3>Create Link</h3>
+	<br />
+	<h5>Your shortlink to</h5>
+	<br />	
+	<h4>{{ campaign.long_url }}</h4>
+	<br />
+	<div class="center">is</div>
+	<br />
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="link"></label>  
+	  <div class="col-md-4">
+	  <input id="link" name="link" placeholder="" class="link-copy-input input-md" type="text" value="{{ link.short_url }}" readonly="readonly">	    
+	  <span class="input-group-button">
+      	<button id="copy-button" class="link-copy-button" type="button" data-copied-hint="Copied!" data-clipboard-text="{{ link.short_url }}" aria-label="Copy to clipboard"><i class="fa fa-clipboard"></i></button>      	
+      </span>
+      <span id="copied-message" class="copied-message">Copied to Clipboard!</span>
+	  </div>
+	</div>
+	
+	<br />
+	<br />
+	
+	<!-- Button -->
+	<div class="control-group">
+	  <label class="control-label" for="create_link"></label>
+	  <div class="controls">
+	    <button id="create_link" name="create_link" class="btn btn-black center" data-toggle="popover" 
+	        data-content="By clicking Accept, you are participating in the campaign to drive traffic to the above URL.">Accept</button>
+	  </div>
+	</div>
+	
+	<br />
+	<br />
+	
+	<!-- Share Buttons -->
+	<div id="share-div" class="share-div center col-md-6">
+	<table style="width: 100%">
+	<tr>
+		<td><a href="/"><i class="fa fa-twitter fa-2x"></i></a></td>
+		<td><a href="/"><i class="fa fa-facebook fa-2x"></i></a></td>
+		<td><a href="/"><i class="fa fa-pinterest fa-2x"></i></a></td>
+		<td><a href="/"><i class="fa fa-linkedin fa-2x"></i></a></td>
+	</table>
+	</div>
+	
+	<br />
+	<pre>
+	{{ dump(link) }}
+	</pre>
+</div>
+{% endblock %}
