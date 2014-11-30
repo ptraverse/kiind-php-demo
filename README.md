@@ -1,4 +1,4 @@
-# kiind-php-demo <img src="http://img.shields.io/badge/status-awesome-lightgrey.svg" />
+# kiind-php-demo <img src="http://img.shields.io/badge/status-unfinished-orange.svg">
 
 "Cash for Clicks" - B2C Marketing Idea
 
