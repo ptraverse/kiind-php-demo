@@ -18,7 +18,7 @@ class Campaign
 	/** @ORM\Column(length=24) */
 	public $short_name;
 	/** @ORM\Column(type="integer") */
-	public $user;
+	public $user_id;
 	/** @ORM\Column(type="integer") */
 	public $gift_id;
 	/** @ORM\Column(type="float") */
@@ -32,7 +32,7 @@ class Campaign
 	{
 		$this->long_url = $long_url;
 		$this->short_name = $short_name;
-		$this->user = $user_id;
+		$this->user_id = $user_id;
 		$this->gift_id = $gift_id;
 		$this->gift_amount = $gift_amount;
 		$this->clicks = $clicks;

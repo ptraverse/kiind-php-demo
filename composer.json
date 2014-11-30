@@ -10,7 +10,8 @@
         "illuminate/database": "4.2.9",
         "ircmaxell/password-compat": "1.0.3",
         "twig/twig": "1.16.2",
-        "zeroclipboard/zeroclipboard": "dev-master"
+        "zeroclipboard/zeroclipboard": "dev-master",
+        "google/apiclient": "1.1.*@dev"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "4.3.4"

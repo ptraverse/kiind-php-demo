@@ -32,8 +32,8 @@
 			<td>{{ c.gift_card_name }}</td>
 			<td>${{ c.gift_amount|number_format(2) }}</td>
 			<td>{{ c.clicks }}</td>
-			{% if c.link %}
-				<td><a href="/{{ c.link }}">My Link</a></td>
+			{% if c.link_id %}
+				<td><a href="/link/{{ c.link_id }}">My Link</a></td>
 			{% else %}
 				<td><a href="/link/create/{{ c.id }}">Get Link</a></td>
 			{% endif %}
@@ -45,4 +45,7 @@
 	{% endfor %}
 	</table>
 </div>
+
+{{ dump(campaigns) }}
+
 {% endblock %}

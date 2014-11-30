@@ -20,17 +20,30 @@ class CampaignController extends LoginRequiredController
 			}
 		}
 		else
-		{
-			//TODO - order by
-			$campaigns = $this->em->getRepository('Campaign')->findAll();
-			//Replace Gift ID with Gift Card Name			
+		{			
+			$campaigns_q = $this->em->createQuery("
+					SELECT
+						c.id,
+						c.short_name,
+						c.long_url,
+						c.gift_id,
+						c.gift_amount,
+						c.clicks,
+						l.id AS link_id
+					FROM Campaign AS c
+					LEFT JOIN Link AS l
+						WITH c.id = l.campaign_id AND l.user_id = ".$this->user->id."					
+					ORDER BY c.id DESC
+				");
+			$campaigns = $campaigns_q->getResult();
+			
+			//Replace Gift ID with Gift Card Name
 			$gift_cards = $kas->apiMarketplaceAllGifts();
-			foreach ($campaigns as $c)
-			{				
-				$c->gift_card_name = $gift_cards[$c->gift_id];
+			foreach ($campaigns as &$c)
+			{
+				$c['gift_card_name'] = $gift_cards[$c['gift_id']];
 			}
-			//TODO - Add Link to "My Link" or Link to Create Link
-			echo $this->twig->render("campaign_list.html.twig",array("user"=>$this->user,"campaigns"=>$campaigns));
+			echo $this->twig->render("campaign_list.html.twig",array("user"=>$this->user,"campaigns"=>$campaigns,"campaigns_r"=>$campaigns_r));
 		}		
 	}	
 

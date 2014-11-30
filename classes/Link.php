@@ -21,16 +21,25 @@ class Link
 	public $redirect_url;
 	
 	/** @ORM\Column(type="integer") */
-	public $user;
+	public $user_id;
 	
 	/** @ORM\Column(type="integer") */
-	public $campaign;
+	public $campaign_id;
+	
+	/** @ORM\Column(type="integer", nullable=true) */
+	public $clicks;
+	
+	/** @ORM\Column(type="datetime") */
+	public $date_created;
+	
+	/** @ORM\Column(type="datetime", nullable=true) */
+	public $date_updated;
 	
 	public function __construct($campaign_id,$user_id)
 	{
-		$this->campaign = $campaign_id;
-		$this->user = $user_id;		
-		$this->redirect_url = 'http://'.$_SERVER['HTTP_HOST'].'/r/'.$this->campaign.'/'.$this->user; //cruft
+		$this->campaign_id = $campaign_id;
+		$this->user_id = $user_id;		
+		$this->redirect_url = 'http://'.$_SERVER['HTTP_HOST'].'/r/'.$this->campaign_id.'/'.$this->user_id; //cruft?			
 	}
 	
 	public function __get($property)
@@ -62,11 +71,11 @@ class Link
 	
 	public function getNewShortlink()
 	{
-		$oas = new OwlyApiService();
-		$res = $oas->urlShorten($this->redirect_url);
-		$res_array = $res->json();
-		$this->short_url = $res_array['results']['shortUrl'];
-		return $res_array['shortUrl'];
+		$gas = new GooglApiService();
+		$short_url = $gas->urlShorten($this->redirect_url);
+		$this->short_url = $short_url;
+		$this->date_created = new DateTime();
+		return $this->short_url;
 	}
 	
 }

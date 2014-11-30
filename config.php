@@ -127,6 +127,12 @@ $owly_api_key_array = json_decode($owly_api_key_file, TRUE);
 define("OWLY_API_KEY",(string)($owly_api_key_array['owly_api_key']));
 define("OWLY_BASE_URL",(string)($owly_api_key_array['base_url']));
 
+//Define GOOGL_API_KEY and GOOGLE_BASE_URL
+$googl_api_key_file = file_get_contents("private/googl_api_key.json");
+$googl_api_key_array = json_decode($googl_api_key_file, TRUE);
+define("GOOGL_API_KEY",(string)($googl_api_key_array['api_key']));
+define("GOOGL_APPLICATION_NAME",(string)($googl_api_key_array['application_name']));
+
 //Define KIIND_CLIENT_ID, KIIND_CLIENT_SECRET, KIIND_BASE_URL
 $kiind_api_key_file = file_get_contents("private/kiind_api_key.json");
 $kiind_api_key_array = json_decode($kiind_api_key_file, TRUE);
@@ -145,7 +151,14 @@ require_once('glue.php');
 /*********************************************
  * Twig Templates 
 *********************************************/
-$loader = new Twig_Loader_Filesystem("templates");
+if ($_SERVER['DOCUMENT_ROOT']>'') //CROCK!@!@#
+{
+	$loader = new Twig_Loader_Filesystem($_SERVER['DOCUMENT_ROOT']."/templates");
+}
+else
+{
+	$loader = new Twig_Loader_Filesystem("templates");
+}
 $twig = new Twig_Environment($loader);
 
 /*********************************************

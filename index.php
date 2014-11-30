@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
     
 $urls = array(
 	'/' => 						'WelcomeController',			//GET
+	'/r/(\d+)/(\d+)' =>			'RedirectController',			//GET
 	'/campaign' => 				'CampaignController',			//GET
 	'/campaign/([a-z]+)' => 	'CampaignController',			//GET
 	'/link/([a-z]+)/(\d+)' =>	'LinkController',				//GET
@@ -33,11 +34,7 @@ catch (Exception $e)
 		echo '<hr>';
 		echo '<pre>';
 		var_dump($e);
-		echo '</pre>';
-		echo '<hr>';
-		echo '<pre>';
-		var_dump($session);
-		echo '</pre>';
+		echo '</pre>';	
 	}
 }
 

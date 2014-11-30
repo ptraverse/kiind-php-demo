@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block sidebar %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="main center">
+	<h3>Link</h3>		
+	<table class="center" align="center" border="1">
+		<tr>
+			<th class="center">Short Url</th>
+			<th class="center">Long Url</th>
+			<th class="center">Link Clicks</th>			
+			<th class="center">Campaign Prize Amount</th>
+			<th class="center">Full Stats</th>								
+		</tr>
+	{% for l in links %}		
+		<tr>
+			<td>{{ l.short_url }}</td>
+			<td>{{ l.long_url }}</td>
+			<td>{{ l.clicks }}</td>					
+			<td>${{ l.gift_amount }}</td>
+			<td><a href="/link/{{ l.id }}">Click Here</a></td>				
+		</tr>
+	{% else %}
+		<tr>
+			<td>No links found</td>
+		</tr>		
+	{% endfor %}
+	</table>
+</div>
+{% endblock %}

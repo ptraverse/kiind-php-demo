@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <script type="text/javascript" src="/js/jquery.countdown.min.js"></script>
+    <script src="/js/redirect.js"></script>
+{% endblock %}
+
+{% block sidebar %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="main center">
+	<input type="hidden" value="{{ r.long_url }}" id="long_url">
+	<h3>Redirecting in <span id="counter"></span></h3>
+	<br />
+	to
+	<br />
+	<h3><a href="{{ r.long_url }}">{{ r.long_url }}</h3>
+	<h5>Click Here To Skip</a></h5>
+	<br />
+	<br />
+	<h4>Quidprize Stats</h4>
+	<div class="center col-md-4">
+	<table style="width:100%; text-align: left; ">	
+		<tr><td align="left"><b>Short URL </b></td><td align="right">{{ r.short_url }}</td></tr>
+		<tr><td align="left"><b>Current Clicks </b></td><td align="right">{{ r.clicks }}TODOclicks</td></tr>
+		<tr><td align="left"><b>Prize Amount </b></td><td align="right">${{ r.gift_amount }}</td></tr>		
+		<tr><td align="left"><b>Target Clicks </b></td><td align="right">{{ r.gift_clicks }}TODOgiftClicks</td></tr>
+		<tr><td align="left"><b>Odds of Winning </b></td><td align="right">{{ r.odds }}TODOodds</td></tr>
+		<tr><td colspan="2" align="center"><a href="/"><i class="fa fa-question-circle"></i></a></td></tr>	
+	</table>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+TODOS
+
+change add link page -done
+add redirect page -done
+finish link list view
+make single link show view 
+change user model to set kiind flag -> Save gift card name
+add CC payment!!!
+Dashboard
+"Clean Up"
+
+production-ready:
+finish redirect OR add dev flag
+add user sign up or contact
+minify/optimize
+
+
+add clicks to model, implement?
+remove any crocks?
+fix any exceptions?
