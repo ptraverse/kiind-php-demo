@@ -1,7 +1,4 @@
-kiind-php-demo
-==============
-
-# Quidprize <img src="http://img.shields.io/badge/status-awesome-lightgrey.svg" />
+# kiind-php-demo <img src="http://img.shields.io/badge/status-awesome-lightgrey.svg" />
 
 "Cash for Clicks" - B2C Marketing Idea
 
