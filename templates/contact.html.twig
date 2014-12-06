@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+     <script src="/js/contact.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="center">
+<h1>Contact Us</h1>
+<br />
+<form class="form-horizontal" id="contact_form">
+<fieldset>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="email">Email</label>  
+  <div class="col-md-4">
+  <input id="email" name="email" placeholder="" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="contact_message">Message</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="contact_message" name="contact_message"></textarea>
+  </div>
+</div>
+
+<!-- TODO add file button -->
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="send"></label>
+  <div class="col-md-4">
+    <button id="send" name="send" class="btn btn-black">Send</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+<div name="response" id="response">
+</div>
+
+</div>
+{% endblock %}

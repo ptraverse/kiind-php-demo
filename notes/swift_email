@@ -1,0 +1,5 @@
+https://packagist.org/packages/swiftmailer/swiftmailer
+
+apt-get install mailutils
+
+http://stackoverflow.com/questions/3536836/trying-to-send-mail-using-swift-mailer-gmail-smtp-php

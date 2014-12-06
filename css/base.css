@@ -10,6 +10,13 @@ a:hover, a:focus
 	color: #111111;
 }
 
+.alert-black
+{
+	background-color: LightGray;
+    border-color: DarkGray;
+    color: Black;
+}
+
 .btn-black 
 { 
 	background-color: hsl(213, 0%, 24%) !important; 

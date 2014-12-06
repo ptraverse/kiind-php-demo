@@ -2,10 +2,11 @@ TODOS
 
 change add link page -done
 add redirect page -done
+add contact page, use for usersignup/changepass
+change user model to set kiind flag
+ -> Save gift card name
 finish link list view
 make single link show view 
-change user model to set kiind flag -> Save gift card name
-add CC payment!!!
 Dashboard
 "Clean Up"
 

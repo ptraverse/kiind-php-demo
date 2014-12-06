@@ -13,7 +13,11 @@ class StaticPagesController extends BaseController
 		{
 			if ($matches[1]=='help')
 			{
-				$this->help();
+				echo $this->twig->render('help.html.twig');
+			}
+			elseif ($matches[1]=='contact')
+			{
+				echo $this->twig->render('contact.html.twig');
 			}			
 			else
 			{
@@ -24,10 +28,5 @@ class StaticPagesController extends BaseController
 		{
 			throw new Exception("Static Page Not Specified","400");
 		}
-	}
-	
-	public function help()
-	{		
-		echo $this->twig->render('help.html.twig');
 	}
 }

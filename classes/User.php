@@ -56,6 +56,9 @@ class User
 	
 	/** @ORM\Column(length=4) */
 	private $pin;
+
+	/** @ORM\Column(type="boolean") */
+	private $kiind_enabled;
 	
 	public function __construct($email,$password,$password_confirm)
 	{
