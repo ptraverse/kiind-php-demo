@@ -10,6 +10,11 @@ a:hover, a:focus
 	color: #111111;
 }
 
+.alert
+{
+	margin-top: 15px;
+}
+
 .alert-black
 {
 	background-color: LightGray;
@@ -110,6 +115,11 @@ label.error
     font-weight: 700;
     margin-bottom: 5px;
     max-width: 100%;
+}
+
+.left 
+{
+	text-align:left;	
 }
 
 .li-sidebar

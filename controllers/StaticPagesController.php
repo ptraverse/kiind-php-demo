@@ -8,7 +8,7 @@ class StaticPagesController extends BaseController
 	}
 	
 	public function GET($matches)
-	{
+	{			
 		if (isset($matches[1]))
 		{
 			if ($matches[1]=='help')
@@ -17,7 +17,7 @@ class StaticPagesController extends BaseController
 			}
 			elseif ($matches[1]=='contact')
 			{
-				echo $this->twig->render('contact.html.twig');
+				echo $this->twig->render('contact.html.twig',array('foo'=>'bar'));
 			}			
 			else
 			{

@@ -66,7 +66,24 @@
 				<div class="col-md-2">&nbsp;</div>
 			{% endif %}
         {% endblock %}
-        <div id="content" class="col-md-8">{% block content %}{% endblock %}</div>
+        
+	        {% for flashMessage in session.flashbag.get('success') %}
+			    <div class="alert alert-success col-md-6 center" role="alert">{{ flashMessage }}</div>
+			{% endfor %}
+			
+			{% for flashMessage in session.flashbag.get('info') %}
+			    <div class="alert alert-info col-md-6 center" role="alert">{{ flashMessage }}</div>
+			{% endfor %}
+			
+			{% for flashMessage in session.flashbag.get('warning') %}
+			    <div class="alert alert-warning col-md-6 center" role="alert">{{ flashMessage }}</div>
+			{% endfor %}
+			
+			{% for flashMessage in session.flashbag.get('danger') %}
+			    <div class="alert alert-danger col-md-6 center" role="alert">{{ flashMessage }}</div>
+			{% endfor %}
+        
+        <div id="content" class="col-md-8 center">{% block content %}{% endblock %}</div>
         <div id="right" class="col-md-2">{% block right %}{% endblock %}</div>
         <div id="footer">{% block footer %}{% endblock %}</div>
     </body>

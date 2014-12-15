@@ -2,14 +2,17 @@
 
 class BaseController
 {
-	protected $twig; 
-	protected $em;
+	public $twig; 
+	public $em;
+	public $session;
 	
 	public function __construct()
 	{
-		global $twig, $em;
+		global $twig, $em, $session;
 		$this->twig = $twig;
+		$this->twig->addGlobal("session", $session);
 		$this->em = $em;
+		$this->session = $session;
 	}
 	
 }

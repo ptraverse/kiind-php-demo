@@ -5,6 +5,8 @@ class LoginController
 	
 	public function POST() //log IN
 	{
+		global $session;
+		
 		$e = $_REQUEST['email'];
 		$p = $_REQUEST['password'];
 	
@@ -23,39 +25,37 @@ class LoginController
 			header("Location: /");
 		}
 		catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
-		{
-			$error_array[] =  'Login field is required.';
+		{			
+			$session->getFlashBag()->add("danger","Login field is required");
+			header("HTTP/1.1 401 User Not Found");
+			header("Location: /");
 		}
 		catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
-		{
-			$error_array[] =  'Password field is required.';
+		{			
+			$session->getFlashBag()->add("danger","Password field is required");
+			header("HTTP/1.1 401 Password Field Required");
+			header("Location: /");
+			
 		}
 		catch (Cartalyst\Sentry\Users\WrongPasswordException $e)
-		{
-			$error_array[] =  'Wrong password, try again.';
+		{			
+			$session->getFlashBag()->add("danger","Wrong password, try again");
+			header("HTTP/1.1 401 Incorrect Password");
+			header("Location: /");
 		}
 		catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
 		{
-			$error_array[] =  'User was not found.';
-			$error_array[] =  '<a href="register.php">Register New User</a>';
+			$session->getFlashBag()->add("danger","User Not Found");
+			header("HTTP/1.1 401 User Not Found");
+			header("Location: /contact");
 		}
 		catch (Cartalyst\Sentry\Users\UserNotActivatedException $e)
 		{
-			$error_array[] = 'User is not activated.';
+			$session->getFlashBag()->add("danger","User Not Activated Yet");
+			header("HTTP/1.1 401 User Not Found");
+			header("Location: /contact");
 		}
 	
-		//------------
-	
-		if (count($error_array)>0)
-		{
-			$error_string = implode('<br>',$error_array);
-			$return_array = array(
-					'error'=>$error_string
-			);
-			
-			throw new Exception($error_string,"500");
-			
-		}
 		
 	}
 	

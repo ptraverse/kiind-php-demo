@@ -2,8 +2,8 @@
 
 class LoginRequiredController extends BaseController
 {
-	protected $user;
-	protected $session;
+	public $user;
+	public $session;
 	
 	public function __construct()
 	{
